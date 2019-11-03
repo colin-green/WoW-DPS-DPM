@@ -62,6 +62,13 @@ function getData() {
     $("#cast-time").val("");
     $("#mana-cost").val("");
 
+    console.log("Initial Values:");
+    console.log(`MinDmg: ${minDmg}`);
+    console.log(`MaxDmg: ${maxDmg}`);
+    console.log(`Cast Time: ${castTime}`);
+    console.log(`Mana Cost: ${manaCost}`);
+    console.log(`Spell Power: ${spellPower}`);
+
     var fullSpellName = spellName;
     var spellCoefficient;
     var effectiveSpellPower;
@@ -255,18 +262,23 @@ function getData() {
             break;
     }
 
+    console.log(`Spell Coefficient: ${spellCoefficient}`);
+
     effectiveSpellPower = spellPower * spellCoefficient;
+    console.log(`Effective Spell Power: ${effectiveSpellPower}`)
     minDmg += effectiveSpellPower;
     maxDmg += effectiveSpellPower;
 
-    var damagePerSecond = (minDmg + maxDmg) / castTime;
-    var damagePerMana = (minDmg + maxDmg) / manaCost;
+    console.log("------------------------------");
+    console.log("After adding effective spell power:")
+    console.log(`MinDmg: ${minDmg}`);
+    console.log(`MaxDmg: ${maxDmg}`);
+
+    var damagePerSecond = ((minDmg + maxDmg) / 2) / castTime;
+    var damagePerMana = ((minDmg + maxDmg) / 2) / manaCost;
+
     damagePerSecond = damagePerSecond.toFixed(2);
     damagePerMana = damagePerMana.toFixed(2);
-
-    console.log(`Spell Name: ${fullSpellName}`);
-    console.log(`Damage/Healing per second: ${damagePerSecond}`);
-    console.log(`Damage/Healing per mana: ${damagePerMana}`);
 
     var newCard = $("<div>");
     var newSpan = $("<span>");
